@@ -1291,3 +1291,8 @@ input[type="text"] {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.shift-left {
+    position: relative; /* Ensure it’s relative to its normal position */
+    left: -10px; /* Shift the div 10px to the left */
+}
