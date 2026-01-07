@@ -1,0 +1,680 @@
+/* Menu Bar */
+#menu-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--menubar-height);
+    background: var(--menubar-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 10000;
+    color: var(--text-color);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.left-menu,
+.right-menu {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.menu-item:hover,
+.menu-icon:hover {
+    opacity: 0.7;
+    cursor: default;
+}
+
+/* Desktop Icons */
+.desktop-icons {
+    position: absolute;
+    top: var(--menubar-height);
+    right: 16px;
+    /* Align to right like real OS or left? Mac aligns right usually */
+    right: auto;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+    z-index: 1;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.desktop-icon:hover .icon-img {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+
+.desktop-icon:active .icon-img {
+    filter: brightness(0.8);
+}
+
+.icon-img {
+    width: 64px;
+    height: 64px;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 4px;
+}
+
+.icon-label {
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.desktop-icon.selected .icon-label {
+    background: var(--accent-color);
+}
+
+/* Dock */
+#dock-container {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 9000;
+    pointer-events: none;
+    /* Let clicks pass through container but not dock */
+}
+
+.dock {
+    pointer-events: auto;
+    background: var(--dock-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: var(--dock-height);
+    padding: 8px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: width 0.2s;
+}
+
+.dock-item {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    background: linear-gradient(to bottom, #fff, #eee);
+}
+
+.dock-item:hover {
+    transform: scale(1.15) translateY(-5px);
+}
+
+.dock-item:active {
+    transform: scale(0.95);
+    filter: brightness(0.9);
+}
+
+.app-icon {
+    font-size: 32px;
+    color: #333;
+}
+
+.dock-separator {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 4px;
+}
+
+/* Window Component */
+.window {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 600px;
+    height: 400px;
+    background: var(--window-bg);
+    border-radius: 10px;
+    box-shadow: var(--window-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: openWindow 0.25s cubic-bezier(0, 1, 0.5, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s, transform 0.2s;
+    /* Smooth restore */
+}
+
+.window.focused {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.window-header {
+    height: 30px;
+    background: #e8e8e8;
+    /* Default title bar */
+    border-bottom: 1px solid #d1d1d1;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    justify-content: center;
+    /* Title centered */
+    position: relative;
+    cursor: default;
+}
+
+.window.focused .window-header {
+    background: #eee;
+}
+
+.window-controls {
+    position: absolute;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.close-btn {
+    background: #ff5f57;
+    border: 1px solid #e0443e;
+}
+
+.min-btn {
+    background: #ffbd2e;
+    border: 1px solid #dea123;
+}
+
+.max-btn {
+    background: #28c940;
+    border: 1px solid #1aab29;
+}
+
+.control-btn:hover {
+    filter: brightness(0.9);
+}
+
+.window-title {
+    font-size: 13px;
+    color: #444;
+    font-weight: 600;
+}
+
+.window-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #fff;
+    cursor: text;
+    user-select: text;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Animations */
+@keyframes openWindow {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes closeWindow {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .window {
+        width: 90% !important;
+        /* Force width */
+        height: 70% !important;
+        left: 5% !important;
+        top: 60px !important;
+    }
+
+    .window.maximized {
+        height: calc(100% - var(--menubar-height) - var(--dock-height)) !important;
+        top: var(--menubar-height) !important;
+        left: 0 !important;
+        width: 100% !important;
+    }
+
+    .dock {
+        gap: 8px;
+        padding: 6px;
+    }
+
+    .dock-item {
+        width: 40px;
+        height: 40px;
+    }
+
+    .app-icon {
+        font-size: 24px;
+    }
+
+    .menu-item {
+        display: none;
+        /* Hide extra menu items on mobile */
+    }
+
+    /* Keep Apple logo and bold item */
+    .menu-item:nth-child(1),
+    .menu-item:nth-child(2) {
+        display: block;
+    }
+}
+
+/* Finder App Styles */
+.finder-window {
+    display: flex;
+    height: 100%;
+    background: #fff;
+}
+
+.finder-sidebar {
+
+    width: 180px;
+    background: rgba(240, 240, 245, 0.8);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid #ddd;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sidebar-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    padding-left: 8px;
+    margin-bottom: 4px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #444;
+    cursor: default;
+}
+
+.sidebar-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-item.active {
+    background: #e0e0e5;
+    color: #333;
+}
+
+.finder-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.finder-toolbar {
+    height: 48px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    color: #555;
+    background: #fff;
+}
+
+.file-grid {
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 16px;
+    align-content: flex-start;
+}
+
+.file-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.file-item:hover {
+    background: #f0f0f5;
+}
+
+.file-item:active {
+    background: #e5e5ea;
+    filter: brightness(0.95);
+}
+
+.file-item i {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.file-name {
+    font-size: 13px;
+    color: #333;
+    word-break: break-word;
+    margin-bottom: 2px;
+}
+
+.file-meta {
+    font-size: 11px;
+    color: #888;
+}
+
+
+/* Browser App Styles */
+.browser-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+}
+
+.browser-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f5f5f7;
+    border-bottom: 1px solid #ddd;
+    gap: 12px;
+}
+
+.browser-controls {
+    display: flex;
+    gap: 8px;
+    color: #555;
+}
+
+.nav-btn {
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.nav-btn:hover {
+    background: #e5e5e5;
+}
+
+.address-bar {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.address-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #333;
+}
+
+.bookmarks-bar {
+    display: flex;
+    gap: 16px;
+    padding: 8px 16px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 12px;
+    color: #555;
+    overflow-x: auto;
+}
+
+.bookmark {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.bookmark:hover {
+    background: #eee;
+    color: #000;
+}
+
+.browser-viewport {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    position: relative;
+    background: #fff;
+    scroll-behavior: smooth;
+}
+
+.browser-home {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.home-card {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+}
+
+.home-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent-color);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: var(--accent-color);
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Terminal Styles */
+.terminal-app {
+    background: #000;
+    /* Deep black */
+    color: #33ff00;
+    /* Hacker green */
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+    padding: 16px;
+    font-size: 14px;
+    overflow-y: auto;
+    cursor: text;
+}
+
+.terminal-line {
+    margin-bottom: 4px;
+    line-height: 1.4;
+    word-break: break-all;
+}
+
+.command-line {
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: #ff00ff;
+    /* Neon pink prompt */
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.cmd-input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    flex: 1;
+}
+
+/* Mail App Styles */
+.mail-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #f5f5f7;
+}
+
+.mail-toolbar {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+}
+
+.mail-compose {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mail-field {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.field-label {
+    width: 60px;
+    color: #888;
+    font-size: 13px;
+}
+
+.field-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.mail-body {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    margin-top: 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.success-toast {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    /* Dark toast */
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
