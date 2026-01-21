@@ -309,6 +309,10 @@
     .menu-item:nth-child(2) {
         display: block;
     }
+
+    #dock-container {
+        bottom: 80px; /* Move dock up to avoid mobile browser bars */
+    }
 }
 
 /* Finder App Styles */
