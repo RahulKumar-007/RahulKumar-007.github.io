@@ -222,6 +222,20 @@ integrating with PostgreSQL using sequelize ORM to manage a large-scale question
                                 <p style="font-size: 13px; color: #666; margin-top: 8px; line-height: 1.5;">SaaS AI Image Processing Platform.</p>
                             </div>
                          </div>
+                         <div style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s; cursor: pointer;"
+                              onmouseover="this.style.transform='translateY(-4px)'"
+                              onmouseout="this.style.transform='translateY(0)'">
+                            <div style="height: 160px; overflow: hidden;">
+                                <img src="../../Assets/project_myvcs.png" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="padding: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <h3 style="font-size: 16px; margin: 0;">myVCS</h3>
+                                    <a href="https://github.com/RahulKumar-007/Version_Control_System" target="_blank" style="text-decoration: none; color: var(--accent-color); font-size: 12px; border: 1px solid var(--accent-color); padding: 4px 8px; border-radius: 4px;">View Code</a>
+                                </div>
+                                <p style="font-size: 13px; color: #666; margin-top: 8px; line-height: 1.5;">Custom VCS in C++17 with content-addressed storage, SHA-256 hashing, zlib compression, commit DAG, branching, three-way merge, diff engine, stash, and 25+ integration tests.</p>
+                            </div>
+                         </div>
                     </div>
                 </div>
              `;
