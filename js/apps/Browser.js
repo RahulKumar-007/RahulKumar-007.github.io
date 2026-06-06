@@ -143,30 +143,82 @@ export class Browser {
 
         } else if (route === 'about') {
             html = `
-                <div style="padding: 40px; max-width: 800px; margin: 0 auto;">
-                    <div style="display: flex; gap: 32px; align-items: flex-start; margin-bottom: 40px;">
+                <div style="padding: 40px 48px; max-width: 860px; margin: 0 auto; font-family: 'Inter', system-ui, sans-serif;">
+
+                    <!-- Hero -->
+                    <div style="display: flex; gap: 32px; align-items: center; margin-bottom: 40px; background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%); border-radius: 20px; padding: 28px; border: 1px solid #e0e7ff;">
                         <img src="../../Assets/profile_image.png"
- style="width: 120px; height: 120px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                             style="width: 110px; height: 110px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--accent-color, #6366f1); flex-shrink: 0;">
                         <div>
-                             <h1 style="font-size: 32px; margin-bottom: 8px;">Rahul Kumar</h1>
-                             <p style="font-size: 18px; color: #666; margin-bottom: 16px;">Passionate Developer & ML Enthusiast</p>
-                             <p style="line-height: 1.6; color: #444;">
-                                 Hello! I’m a product-minded software engineer who lives at the intersection of AI, data, and real-world impact. I’ve built and shipped AI-powered systems across analytics, automation, accessibility, and full-stack platforms, from vision transformers and LLM pipelines to scalable web apps.
-                             </p>
+                            <h1 style="font-size: 28px; font-weight: 700; margin: 0 0 4px; color: #1e1b4b;">Rahul Kumar</h1>
+                            <p style="font-size: 14px; font-weight: 600; color: var(--accent-color, #6366f1); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">Associate Engineer · Cloud & Data Engineering</p>
+                            <p style="line-height: 1.7; color: #475569; font-size: 14px; margin: 0;">
+                                Engineer at the intersection of <strong>cloud data engineering</strong>, <strong>AI/ML</strong>, and <strong>full-stack development</strong>. Currently building scalable Azure data pipelines at Nagarro using ADF, Databricks &amp; Delta Lake. Previously interned at MakeMyTrip (Product Analytics) and Bharti Airtel Foundation (AI Automation).
+                            </p>
                         </div>
                     </div>
-                    
-                    <h3>Technical Expertise</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px;">
-                        <div>
-                            <h4 style="margin-bottom: 12px; color: var(--accent-color);">Languages & DB</h4>
-                            <p style="color: #555;">Cpp,MATLAB,Python,SQL,MongoDB, JavaScript,TypeScript,HTML,CSS</p>
+
+                    <!-- Latest Experience Highlight -->
+                    <div style="margin-bottom: 36px; background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 0 12px 12px 0; padding: 18px 22px;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <i class="ph-fill ph-lightning" style="color: #f59e0b; font-size: 16px;"></i>
+                            <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #92400e;">Current Role — Nagarro</span>
                         </div>
-                        <div>
-                            <h4 style="margin-bottom: 12px; color: var(--accent-color);">Frameworks & Technologies</h4>
-                            <p style="color: #555;">React, Express, Node.js,Next.js, TailwindCSS,Vercel,Jest,Pandas,NumPy,Matplotlib,OpenCV,
-Seaborn,Tensorflow</p>
+                        <h3 style="font-size: 16px; font-weight: 700; color: #1e1b4b; margin: 0 0 10px;">Associate Engineer Trainee</h3>
+                        <ul style="margin: 0; padding-left: 18px; color: #78350f; font-size: 13px; line-height: 1.7;">
+                            <li>Built &amp; deployed an end-to-end cloud data pipeline on <strong>Azure</strong> (ADF + ADLS Gen2 + Databricks) with <strong>medallion architecture</strong> (Bronze–Silver–Gold) using Delta Lake.</li>
+                            <li>Developed parameterized <strong>ETL workflows</strong> using PySpark &amp; Azure Data Factory — handling schema drift, missing data, and automated ingestion with scheduled triggers.</li>
+                            <li>Optimized big data workloads via Spark techniques (partitioning, caching, broadcast joins, Z-Ordering) and implemented monitoring, logging &amp; data quality checks.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skills Section -->
+                    <h2 style="font-size: 18px; font-weight: 700; color: #1e1b4b; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        <i class="ph-fill ph-code" style="color: var(--accent-color, #6366f1);"></i>
+                        Technical Skills
+                    </h2>
+
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+
+                        <!-- Languages & DB -->
+                        <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px 22px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                                <i class="ph-fill ph-database" style="color: #8b5cf6; font-size: 16px;"></i>
+                                <span style="font-size: 13px; font-weight: 700; color: #4c1d95; text-transform: uppercase; letter-spacing: 0.06em;">Languages &amp; DB</span>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${['C/C++','MATLAB','Python','SQL','MongoDB','JavaScript','TypeScript','HTML','CSS'].map(s =>
+                                    `<span style="background: #f3f0ff; color: #5b21b6; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid #ddd6fe;">${s}</span>`
+                                ).join('')}
+                            </div>
                         </div>
+
+                        <!-- Frameworks & Technologies -->
+                        <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px 22px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                                <i class="ph-fill ph-squares-four" style="color: #0ea5e9; font-size: 16px;"></i>
+                                <span style="font-size: 13px; font-weight: 700; color: #0c4a6e; text-transform: uppercase; letter-spacing: 0.06em;">Frameworks &amp; Technologies</span>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${['React','Express','Node.js','Next.js','TailwindCSS','Vercel','Jest','Pandas','NumPy','Matplotlib','OpenCV','Seaborn','TensorFlow'].map(s =>
+                                    `<span style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid #bae6fd;">${s}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Tools & Proficiencies -->
+                        <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px 22px;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                                <i class="ph-fill ph-wrench" style="color: #10b981; font-size: 16px;"></i>
+                                <span style="font-size: 13px; font-weight: 700; color: #064e3b; text-transform: uppercase; letter-spacing: 0.06em;">Tools &amp; Proficiencies</span>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${['Docker','Spark','Databricks','Azure (ADF, ADLS Gen2)','Clerk','Stripe','Shadcn','RESTful APIs','Unix','Agile','Scrum'].map(s =>
+                                    `<span style="background: #d1fae5; color: #065f46; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid #a7f3d0;">${s}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             `;
@@ -174,8 +226,15 @@ Seaborn,Tensorflow</p>
             html = `
                 <div style="padding: 40px; max-width: 800px; margin: 0 auto;">
                     <h1 style="margin-bottom: 32px;">Experience</h1>
-                    
+
                     <div style="margin-bottom: 32px; border-left: 3px solid var(--accent-color); padding-left: 20px;">
+                        <h3 style="font-size: 18px;">Associate Engineer Trainee</h3>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 8px; font-weight: bold;">Nagarro • 01/2026 – Present</div>
+                        <p style="color: #444; line-height: 1.5;">Built and deployed an end-to-end cloud data pipeline on Azure, integrating ADF, ADLS Gen2, and Databricks, implementing
+medallion architecture (Bronze–Silver–Gold) with Delta Lake for scalable data processing</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 32px; border-left: 3px solid #ddd; padding-left: 20px;">
                         <h3 style="font-size: 18px;">Product Analyst Intern</h3>
                         <div style="color: #666; font-size: 14px; margin-bottom: 8px; font-weight: bold;">MakeMyTrip • 06/2025 – 07/2025</div>
                         <p style="color: #444; line-height: 1.5;">Analyzed user funnels across PWA and SEO/SEM journeys to identify drop-offs and abnormal behavior using session-level insights. Built custom dashboards to track conversion trends, search anomalies, and booking pain points. Led large-scale hotel deduplication using rule-based logic and DinoV2 vision embeddings, and generated AI-powered SEM ad copies for major tourist cities.</p>

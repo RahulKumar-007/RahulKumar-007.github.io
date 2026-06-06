@@ -68,7 +68,7 @@ export class FinderApp {
 
         if (resumeFile) {
             resumeFile.addEventListener('click', () => {
-                const pdfUrl = 'https://drive.google.com/file/d/1HbkwEp5eLRC_i-64dJGawIPofiZoF0KM/preview';
+                const pdfUrl = 'https://drive.google.com/file/d/14sy2TvzdDwGDvx2qifLTPvVtn4uEfsks/preview';
                 window.dispatchEvent(new CustomEvent('open-pdf', { detail: pdfUrl }));
             });
         }
