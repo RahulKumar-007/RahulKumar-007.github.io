@@ -195,6 +195,14 @@ export class WindowManager {
         div.style.top = `${60 + offset}px`;
         div.style.left = `${60 + offset}px`;
 
+        // Loading skeleton (replaced by actual content)
+        const loadingContent = content || `
+            <div class="window-loading">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Loading ${title}...</div>
+            </div>
+        `;
+
         // Inner HTML skeleton
         div.innerHTML = `
             <div class="window-header">
@@ -206,7 +214,7 @@ export class WindowManager {
                 <div class="window-title">${title}</div>
             </div>
             <div class="window-content">
-                ${content}
+                ${loadingContent}
             </div>
         `;
 

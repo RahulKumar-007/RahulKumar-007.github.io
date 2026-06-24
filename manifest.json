@@ -1,0 +1,16 @@
+{
+  "name": "Rahul Kumar - PortfolioOS",
+  "short_name": "PortfolioOS",
+  "description": "macOS-themed portfolio of Rahul Kumar — Cloud & Data Engineering",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#007aff",
+  "icons": [
+    {
+      "src": "Assets/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OS Portfolio</title>
     <meta name="description" content="A minimal OS-style portfolio website.">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PortfolioOS">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +19,24 @@
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <!-- Chart.js for skill visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/components.css">
 </head>
 
 <body>
-    <div id="desktop">
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo"><i class="ph-fill ph-apple-logo"></i></div>
+            <div class="splash-spinner"></div>
+            <div class="splash-text">Starting up...</div>
+        </div>
+    </div>
+
+    <div id="desktop" style="display: none;">
         <!-- Background Wallpaper -->
         <div class="wallpaper"></div>
 
@@ -38,6 +53,9 @@
                 <span class="menu-item">Help</span>
             </div>
             <div class="right-menu">
+                <button id="download-resume-btn" class="resume-btn" title="Download Resume">
+                    <i class="ph ph-download-simple"></i> Resume
+                </button>
                 <span class="menu-icon"><i class="ph ph-wifi-high"></i></span>
                 <span class="menu-icon"><i class="ph ph-battery-charging"></i></span>
                 <span id="clock" class="clock">12:00 PM</span>

@@ -1,0 +1,133 @@
+{
+  "profile": {
+    "name": "Rahul Kumar",
+    "title": "Associate Engineer · Cloud & Data Engineering",
+    "tagline": "Engineer at the intersection of cloud data engineering, AI/ML, and full-stack development.",
+    "description": "Currently building scalable Azure data pipelines at Nagarro using ADF, Databricks & Delta Lake. Previously interned at MakeMyTrip (Product Analytics) and Bharti Airtel Foundation (AI Automation).",
+    "email": "chhonkarrahul1362@gmail.com",
+    "avatar": "../../Assets/profile_image.png",
+    "links": {
+      "github": "https://github.com/RahulKumar-007",
+      "linkedin": "https://www.linkedin.com/in/rahul-kumar-5639421b1/"
+    }
+  },
+  "skills": {
+    "languages": {
+      "icon": "ph-fill ph-database",
+      "color": "#8b5cf6",
+      "labelColor": "#4c1d95",
+      "bgColor": "#f3f0ff",
+      "borderColor": "#ddd6fe",
+      "textColor": "#5b21b6",
+      "label": "Languages & DB",
+      "items": [
+        { "name": "C/C++", "level": 80 },
+        { "name": "MATLAB", "level": 65 },
+        { "name": "Python", "level": 90 },
+        { "name": "SQL", "level": 85 },
+        { "name": "MongoDB", "level": 70 },
+        { "name": "JavaScript", "level": 85 },
+        { "name": "TypeScript", "level": 80 },
+        { "name": "HTML", "level": 90 },
+        { "name": "CSS", "level": 85 }
+      ]
+    },
+    "frameworks": {
+      "icon": "ph-fill ph-squares-four",
+      "color": "#0ea5e9",
+      "labelColor": "#0c4a6e",
+      "bgColor": "#e0f2fe",
+      "borderColor": "#bae6fd",
+      "textColor": "#0369a1",
+      "label": "Frameworks & Technologies",
+      "items": [
+        { "name": "React", "level": 80 },
+        { "name": "Express", "level": 75 },
+        { "name": "Node.js", "level": 80 },
+        { "name": "Next.js", "level": 70 },
+        { "name": "TailwindCSS", "level": 85 },
+        { "name": "Pandas", "level": 85 },
+        { "name": "NumPy", "level": 80 },
+        { "name": "TensorFlow", "level": 65 },
+        { "name": "OpenCV", "level": 60 },
+        { "name": "Jest", "level": 70 }
+      ]
+    },
+    "tools": {
+      "icon": "ph-fill ph-wrench",
+      "color": "#10b981",
+      "labelColor": "#064e3b",
+      "bgColor": "#d1fae5",
+      "borderColor": "#a7f3d0",
+      "textColor": "#065f46",
+      "label": "Tools & Proficiencies",
+      "items": [
+        { "name": "Docker", "level": 75 },
+        { "name": "Spark", "level": 70 },
+        { "name": "Databricks", "level": 75 },
+        { "name": "Azure (ADF, ADLS)", "level": 80 },
+        { "name": "RESTful APIs", "level": 85 },
+        { "name": "Unix", "level": 80 },
+        { "name": "Git", "level": 90 },
+        { "name": "Agile/Scrum", "level": 75 }
+      ]
+    }
+  },
+  "experience": [
+    {
+      "role": "Associate Engineer Trainee",
+      "company": "Nagarro",
+      "period": "01/2026 – Present",
+      "description": "Built and deployed an end-to-end cloud data pipeline on Azure, integrating ADF, ADLS Gen2, and Databricks, implementing medallion architecture (Bronze–Silver–Gold) with Delta Lake for scalable data processing",
+      "color": "var(--accent-color)",
+      "highlights": [
+        "Built & deployed an end-to-end cloud data pipeline on Azure (ADF + ADLS Gen2 + Databricks) with medallion architecture (Bronze–Silver–Gold) using Delta Lake.",
+        "Developed parameterized ETL workflows using PySpark & Azure Data Factory — handling schema drift, missing data, and automated ingestion with scheduled triggers.",
+        "Optimized big data workloads via Spark techniques (partitioning, caching, broadcast joins, Z-Ordering) and implemented monitoring, logging & data quality checks."
+      ]
+    },
+    {
+      "role": "Product Analyst Intern",
+      "company": "MakeMyTrip",
+      "period": "06/2025 – 07/2025",
+      "description": "Analyzed user funnels across PWA and SEO/SEM journeys to identify drop-offs and abnormal behavior using session-level insights. Built custom dashboards to track conversion trends, search anomalies, and booking pain points. Led large-scale hotel deduplication using rule-based logic and DinoV2 vision embeddings, and generated AI-powered SEM ad copies for major tourist cities.",
+      "color": "#ddd"
+    },
+    {
+      "role": "AI Automation Intern",
+      "company": "Bharti Airtel Foundation",
+      "period": "06/2024 – 08/2024",
+      "description": "Developed the complete backend infrastructure for an AI-based Question Bank Generator app using Node.js and Express, integrating with PostgreSQL using sequelize ORM to manage a large-scale question database for 100,000 potential users.",
+      "color": "#ddd"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Autonomous Fact Checker",
+      "tagline": "Real-time fact verification using Gemini & RAG",
+      "image": "../../Assets/project_fact_checker.jpg",
+      "description": "Streamlit-based autonomous fact-checking web app integrating Google Gemini via LangChain, DuckDuckGo search, and a ChromaDB knowledge base with HuggingFace embeddings to verify user claims in real time.",
+      "codeUrl": "https://github.com/RahulKumar-007/Fact_checker",
+      "demoUrl": "",
+      "tech": ["Python", "Streamlit", "LangChain", "Google Gemini", "ChromaDB", "HuggingFace"]
+    },
+    {
+      "title": "ImgAi",
+      "tagline": "SaaS AI Image Processing Platform",
+      "image": "../../Assets/project_imgai.jpg",
+      "description": "Full-stack SaaS AI image processing platform with user authentication, credit-based billing, and multiple AI-powered image transformation tools.",
+      "codeUrl": "",
+      "demoUrl": "https://img-ai-nu.vercel.app/",
+      "tech": ["React", "Next.js", "Clerk", "Stripe", "TailwindCSS", "Shadcn"]
+    },
+    {
+      "title": "myVCS",
+      "tagline": "Custom Version Control System in C++17",
+      "image": "../../Assets/project_myvcs.png",
+      "description": "Custom VCS in C++17 with content-addressed storage, SHA-256 hashing, zlib compression, commit DAG, branching, three-way merge, diff engine, stash, and 25+ integration tests.",
+      "codeUrl": "https://github.com/RahulKumar-007/Version_Control_System",
+      "demoUrl": "",
+      "tech": ["C++17", "SHA-256", "zlib", "DAG", "Git internals"]
+    }
+  ]
+}

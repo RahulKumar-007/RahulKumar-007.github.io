@@ -68,8 +68,13 @@ export class FinderApp {
 
         if (resumeFile) {
             resumeFile.addEventListener('click', () => {
-                const pdfUrl = 'https://drive.google.com/file/d/14sy2TvzdDwGDvx2qifLTPvVtn4uEfsks/preview';
-                window.dispatchEvent(new CustomEvent('open-pdf', { detail: pdfUrl }));
+                // Download resume PDF directly
+                const link = document.createElement('a');
+                link.href = '../../Assets/Resume_2026.pdf';
+                link.download = 'Rahul_Kumar_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             });
         }
 
