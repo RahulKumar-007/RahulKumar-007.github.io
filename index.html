@@ -1,65 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahul Kumar - Interactive Portfolio</title>
-    <meta name="description" content="Explore my portfolio in an interactive 2D world.">
-    
+    <title>OS Portfolio</title>
+    <meta name="description" content="A minimal OS-style portfolio website.">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PortfolioOS">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
+    <!-- Chart.js for skill visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <!-- Styles -->
-    <link rel="stylesheet" href="styles/game.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
 </head>
+
 <body>
-    <!-- Game Viewport -->
-    <div id="viewport">
-        <!-- The World -->
-        <div id="world">
-            <!-- Ground patterns and paths will be injected here -->
-            <div id="ground-layer"></div>
-            
-            <!-- Interactables, Scenery, and Zones -->
-            <div id="object-layer"></div>
-        </div>
-
-        <!-- The Player (Fixed in center of viewport) -->
-        <div id="player">
-            <div class="player-sprite">
-                <div class="player-head"></div>
-                <div class="player-body"></div>
-                <div class="player-shadow"></div>
-            </div>
-            <div id="interaction-prompt" class="hidden">
-                <span class="key">E</span> Interact
-            </div>
-        </div>
-        
-        <!-- UI Layer (Overlays, Dialogues, Modals) -->
-        <div id="ui-layer">
-            <div id="intro-screen">
-                <div class="intro-card">
-                    <h1>Welcome to my World.</h1>
-                    <p>Use <strong>W A S D</strong> or <strong>Arrow Keys</strong> to move.<br>Press <strong>E</strong> to interact with objects.</p>
-                    <button id="start-btn">Start Exploring</button>
-                </div>
-            </div>
-
-            <!-- Generic Dialog Box -->
-            <div id="dialog-box" class="hidden">
-                <button class="close-btn"><i class="ph ph-x"></i></button>
-                <div id="dialog-content"></div>
-            </div>
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo"><i class="ph-fill ph-apple-logo"></i></div>
+            <div class="splash-spinner"></div>
+            <div class="splash-text">Starting up...</div>
         </div>
     </div>
 
+    <div id="desktop" style="display: none;">
+        <!-- Background Wallpaper -->
+        <div class="wallpaper"></div>
+
+        <!-- Top Menu Bar -->
+        <header id="menu-bar">
+            <div class="left-menu">
+                <span class="apple-logo"><i class="ph-fill ph-apple-logo"></i></span>
+                <span class="menu-item"><b>Finder</b></span>
+                <span class="menu-item">File</span>
+                <span class="menu-item">Edit</span>
+                <span class="menu-item">View</span>
+                <span class="menu-item">Go</span>
+                <span class="menu-item">Window</span>
+                <span class="menu-item">Help</span>
+            </div>
+            <div class="right-menu">
+                <button id="download-resume-btn" class="resume-btn" title="Download Resume">
+                    <i class="ph ph-download-simple"></i> Resume
+                </button>
+                <span class="menu-icon"><i class="ph ph-wifi-high"></i></span>
+                <span class="menu-icon"><i class="ph ph-battery-charging"></i></span>
+                <span id="clock" class="clock">12:00 PM</span>
+            </div>
+        </header>
+
+        <!-- Main Window Area -->
+        <main id="window-area">
+            <!-- Desktop Icons -->
+            <div class="desktop-icons">
+                <!-- Icons will be injected here or hardcoded -->
+                <div class="desktop-icon" data-target="about">
+                    <div class="icon-img folder-icon"><i class="ph-fill ph-folder-user"></i></div>
+                    <span class="icon-label">About Me</span>
+                </div>
+                <div class="desktop-icon" data-target="projects">
+                    <div class="icon-img folder-icon"><i class="ph-fill ph-folder-star"></i></div>
+                    <span class="icon-label">Projects</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Dock -->
+        <footer id="dock-container">
+            <div id="dock" class="dock">
+                <!-- Dock items will be injected by JS or hardcoded -->
+                <div class="dock-item" data-app="finder" title="Finder">
+                    <div class="app-icon"><i class="ph-fill ph-smiley"></i></div>
+                </div>
+                <div class="dock-item" data-app="mail" title="Mail">
+                    <div class="app-icon"><i class="ph-fill ph-envelope"></i></div>
+                </div>
+                <div class="dock-item" data-app="safari" title="Browser">
+                    <div class="app-icon"><i class="ph-fill ph-compass"></i></div>
+                </div>
+                <div class="dock-separator"></div>
+                <div class="dock-item" data-app="terminal" title="Terminal">
+                    <div class="app-icon"><i class="ph-fill ph-terminal-window"></i></div>
+                </div>
+                <div class="dock-item" data-app="trash" title="Trash">
+                    <div class="app-icon"><i class="ph-fill ph-trash"></i></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
     <!-- Scripts -->
-    <script type="module" src="js/game/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
