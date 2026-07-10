@@ -103,6 +103,16 @@
   ],
   "projects": [
     {
+      "title": "OS Agent",
+      "tagline": "Privacy-First AI Desktop Assistant",
+      "image": "",
+      "description": "Privacy-first AI desktop assistant powered by local LLMs (LM Studio/Ollama/OpenAI-compatible) enabling natural language control over the OS for file management, search, and system automation without cloud dependency. Features an agentic execution pipeline converting requests into multi-step plans with path resolution, semantic search, tool chaining, approval workflows, and policy-based access control.",
+      "period": "06/2026 – Present",
+      "codeUrl": "https://github.com/RahulKumar-007/OS_Agent",
+      "demoUrl": "",
+      "tech": ["FastAPI", "WebSocket", "React", "Local LLMs", "OCR", "Git", "Semantic Search", "PTY"]
+    },
+    {
       "title": "Autonomous Fact Checker",
       "tagline": "Real-time fact verification using Gemini & RAG",
       "image": "../../Assets/project_fact_checker.jpg",
