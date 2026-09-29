@@ -444,51 +444,31 @@
     }
 }
 
-/* Media Queries */
+/* ============================================================
+   MOBILE RESPONSIVE — Complete Overhaul
+   ============================================================ */
+
+/* ---- Tablet & Large Phone (≤ 768px) ---- */
 @media (max-width: 768px) {
-    .window {
-        width: 92% !important;
-        height: 65% !important;
-        left: 4% !important;
-        top: 50px !important;
-        border-radius: 12px;
+
+    /* --- CSS Variables --- */
+    :root {
+        --menubar-height: 40px;
+        --dock-height: 64px;
     }
 
-    .window.maximized {
-        height: calc(100% - var(--menubar-height) - var(--dock-height) - 20px) !important;
-        top: var(--menubar-height) !important;
-        left: 0 !important;
-        width: 100% !important;
-        border-radius: 0;
-    }
-
-    .dock {
-        gap: 6px;
-        padding: 6px 10px;
-        border-radius: 16px;
-        height: 60px;
-    }
-
-    .dock-item {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-    }
-
-    .app-icon {
-        font-size: 20px;
-    }
-
-    .dock-separator {
-        height: 30px;
+    /* --- Menu Bar --- */
+    #menu-bar {
+        padding: 0 12px;
+        font-size: 12px;
     }
 
     .menu-item {
         display: none;
     }
 
-    .menu-item:nth-child(1),
-    .menu-item:nth-child(2) {
+    /* Keep "RahulOS" label visible */
+    .left-menu .menu-item:nth-child(2) {
         display: block;
     }
 
@@ -504,146 +484,453 @@
         display: none;
     }
 
-    .menu-icon:last-child {
-        display: inline;
+    /* keep clock always visible */
+    .clock {
+        display: inline !important;
+        font-size: 12px;
     }
 
-    #dock-container {
-        bottom: 12px;
+    .resume-btn span {
+        display: none;
     }
 
+    .resume-btn {
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0;    /* hide any leftover text */
+    }
+
+    .resume-btn i {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    /* --- Desktop --- */
+    #desktop {
+        /* Ensure body can scroll on mobile if needed */
+        overflow: hidden;
+    }
+
+    /* Desktop icons: horizontal strip just below menu bar */
     .desktop-icons {
-        left: 8px;
-        gap: 12px;
+        top: calc(var(--menubar-height) + 8px);
+        left: 50%;
+        transform: translateX(-50%);
         flex-direction: row;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        gap: 10px;
+        width: max-content;
+        max-width: calc(100vw - 16px);
+        overflow-x: auto;
+        padding: 4px 8px;
+        /* Hide scrollbar while still scrollable */
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .desktop-icons::-webkit-scrollbar {
+        display: none;
     }
 
     .desktop-icon {
-        width: 64px;
+        width: 56px;
+        flex-shrink: 0;
+        /* Disable stagger animation delay on mobile */
+        animation-delay: 0s !important;
     }
 
     .icon-img {
-        width: 48px;
-        height: 48px;
-        font-size: 36px;
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+        border-radius: 12px;
     }
 
     .icon-label {
-        font-size: 11px;
+        font-size: 10px;
+        padding: 1px 5px;
     }
 
-    /* Browser mobile tweaks */
+    /* Hide shortcut pill — too cluttered on mobile */
+    .desktop-shortcut-pill {
+        display: none;
+    }
+
+    /* --- Dock --- */
+    #dock-container {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        /* Push dock to bottom with safe-area support */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        /* Full-width bar on mobile */
+        pointer-events: auto;
+    }
+
+    .dock {
+        width: 100%;
+        border-radius: 0;
+        height: var(--dock-height);
+        gap: 0;
+        padding: 6px 4px;
+        justify-content: space-around;
+        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.12), 0 -8px 24px rgba(0, 0, 0, 0.45);
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .dock-item {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        flex-shrink: 0;
+    }
+
+    .dock-item:hover {
+        /* Disable upward float on mobile — causes layout shift */
+        transform: scale(1.06);
+    }
+
+    .app-icon {
+        font-size: 22px;
+    }
+
+    .dock-tooltip {
+        display: none;
+    }
+
+    .dock-separator {
+        height: 32px;
+        margin: 0 2px;
+    }
+
+    /* --- Window sizing — ensure it doesn't go below the dock --- */
+    .window {
+        width: 96% !important;
+        left: 2% !important;
+        top: calc(var(--menubar-height) + 100px) !important;
+        /* height leaves room for dock + some breathing room */
+        height: calc(100dvh - var(--menubar-height) - var(--dock-height) - 120px) !important;
+        min-height: 300px;
+        border-radius: 14px;
+    }
+
+    .window.maximized {
+        top: var(--menubar-height) !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: calc(100dvh - var(--menubar-height) - var(--dock-height)) !important;
+        border-radius: 0 !important;
+    }
+
+    /* --- Browser --- */
+    .browser-home-wrapper {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .home-hero-banner {
+        padding: 20px 18px;
+        border-radius: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .home-hero-banner h1 {
+        font-size: 20px !important;
+    }
+
+    .hero-badge {
+        font-size: 10px;
+        padding: 3px 9px;
+    }
+
     .browser-home {
-        padding: 20px !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 12px !important;
+        gap: 10px;
     }
 
     .home-card {
-        height: 140px !important;
-        padding: 16px !important;
+        height: 130px !important;
+        padding: 14px 12px !important;
+        border-radius: 12px;
+    }
+
+    .card-icon {
+        font-size: 32px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .card-title {
+        font-size: 13px !important;
+    }
+
+    .github-activity-strip {
+        padding: 14px 16px;
+        border-radius: 12px;
+    }
+
+    /* Browser Toolbar */
+    .browser-toolbar {
+        padding: 6px 8px;
+    }
+
+    .address-bar {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .address-input {
+        font-size: 11px;
     }
 
     .bookmarks-bar {
-        gap: 8px;
-        padding: 6px 10px;
+        gap: 6px;
+        padding: 5px 10px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .bookmarks-bar::-webkit-scrollbar {
+        display: none;
     }
 
     .bookmark {
         font-size: 11px;
         white-space: nowrap;
+        padding: 3px 8px;
     }
 
-    /* Finder mobile */
-    .finder-sidebar {
-        width: 120px;
-    }
-
-    .file-grid {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important;
-        gap: 8px !important;
-        padding: 12px !important;
-    }
-
-    .file-item i {
-        font-size: 36px;
-    }
-
-    /* Timeline mobile */
-    .timeline {
-        padding-left: 24px;
-    }
-
-    /* About page mobile */
+    /* --- About Page --- */
     .about-hero {
         flex-direction: column !important;
         text-align: center;
-        gap: 16px !important;
+        gap: 14px !important;
+        padding: 20px 16px !important;
+    }
+
+    .avatar-ring-wrapper {
+        width: 90px;
+        height: 90px;
+        align-self: center;
+    }
+
+    .avatar-ring-wrapper img {
+        width: 84px;
+        height: 84px;
     }
 
     .about-hero h1 {
-        font-size: 24px !important;
+        font-size: 22px !important;
     }
 
-    .about-hero img {
-        width: 80px !important;
-        height: 80px !important;
+    /* About page container padding */
+    [style*="padding: 40px 48px"] {
+        padding: 20px 16px !important;
     }
 
-    /* Resize button text */
-    .resume-btn span {
-        display: none;
+    [style*="padding: 40px;"] {
+        padding: 20px 16px !important;
     }
 
-    .resume-btn i {
-        font-size: 16px;
-    }
-
-    /* Modal mobile */
-    .modal-content {
-        width: 95%;
-        max-height: 90vh;
-    }
-
-    /* Chart mobile */
+    /* Chart */
     #skills-chart {
-        height: 180px !important;
+        height: 160px !important;
     }
 
-    /* Terminal mobile */
+    /* --- Experience Timeline --- */
+    .timeline {
+        padding-left: 22px;
+    }
+
+    .timeline-dot {
+        left: -24px;
+    }
+
+    .timeline-card {
+        padding: 14px 16px;
+        border-radius: 10px;
+    }
+
+    .timeline-role {
+        font-size: 15px !important;
+    }
+
+    .timeline-meta {
+        flex-wrap: wrap;
+        font-size: 11px;
+    }
+
+    .live-role-pill {
+        font-size: 9px;
+        padding: 1px 6px;
+    }
+
+    /* --- Project Cards --- */
+    .project-banner {
+        min-height: 100px;
+        padding: 14px 16px;
+    }
+
+    .project-banner h3 {
+        font-size: 16px !important;
+        margin-top: 10px !important;
+    }
+
+    /* --- Finder --- */
+    .finder-sidebar {
+        width: 100px;
+    }
+
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)) !important;
+        gap: 8px !important;
+        padding: 10px !important;
+    }
+
+    .file-item i {
+        font-size: 32px;
+    }
+
+    .file-name {
+        font-size: 11px;
+    }
+
+    /* --- Terminal --- */
     .terminal-app {
-        font-size: 12px;
-        padding: 10px;
+        font-size: 11.5px;
+        padding: 12px;
+    }
+
+    /* --- Modal --- */
+    .modal-content {
+        width: 96%;
+        max-height: 88vh;
+        border-radius: 14px;
+    }
+
+    .modal-header {
+        padding: 16px 18px 0;
+    }
+
+    .modal-header h2 {
+        font-size: 18px !important;
+    }
+
+    .modal-body {
+        padding: 14px 18px 18px;
     }
 }
 
+/* ---- Small Phone (≤ 480px) ---- */
 @media (max-width: 480px) {
-    .window {
-        width: 96% !important;
-        left: 2% !important;
-        height: 55% !important;
+
+    :root {
+        --menubar-height: 38px;
+        --dock-height: 58px;
     }
 
+    /* Menu bar tighter */
+    #menu-bar {
+        padding: 0 8px;
+    }
+
+    /* Very narrow — single icon column might show oddly, keep row */
+    .desktop-icons {
+        top: calc(var(--menubar-height) + 6px);
+        gap: 8px;
+    }
+
+    .icon-img {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    .desktop-icon {
+        width: 48px;
+    }
+
+    .icon-label {
+        font-size: 9px;
+    }
+
+    /* Dock */
+    .dock-item {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    .app-icon {
+        font-size: 18px;
+    }
+
+    .dock {
+        padding: 4px 2px;
+        gap: 0;
+        height: var(--dock-height);
+    }
+
+    /* Window */
+    .window {
+        width: 100% !important;
+        left: 0 !important;
+        top: var(--menubar-height) !important;
+        height: calc(100dvh - var(--menubar-height) - var(--dock-height)) !important;
+        border-radius: 0 !important;
+        /* Full screen on tiny phones */
+    }
+
+    /* Home grid - single column */
     .browser-home {
         grid-template-columns: 1fr !important;
     }
 
-    .dock-item {
-        width: 30px;
-        height: 30px;
+    .home-card {
+        height: 100px !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        gap: 12px !important;
+        padding: 12px 16px !important;
     }
 
-    .app-icon {
-        font-size: 16px;
+    .card-icon {
+        font-size: 28px !important;
+        margin-bottom: 0 !important;
     }
 
-    .dock {
-        gap: 4px;
-        padding: 4px 8px;
-        height: 50px;
+    /* About */
+    .avatar-ring-wrapper {
+        width: 76px;
+        height: 76px;
+    }
+
+    .avatar-ring-wrapper img {
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Project cards */
+    .project-banner {
+        min-height: 88px;
+    }
+
+    /* Terminal */
+    .terminal-app {
+        font-size: 10.5px;
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 100%;
+        border-radius: 14px 14px 0 0;
+        position: fixed;
+        bottom: 0;
+        max-height: 80vh;
     }
 }
 
