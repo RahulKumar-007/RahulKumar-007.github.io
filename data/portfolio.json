@@ -8,7 +8,9 @@
     "avatar": "../../Assets/profile_image.png",
     "links": {
       "github": "https://github.com/RahulKumar-007",
-      "linkedin": "https://www.linkedin.com/in/rahul-kumar-5639421b1/"
+      "linkedin": "https://www.linkedin.com/in/rahul-kumar-5639421b1/",
+      "resume": "https://drive.google.com/file/d/1TycfEUCoXz74bnXLsKVyXSxD9FHumboJ/view?usp=sharing",
+      "resumeDownload": "https://drive.google.com/uc?export=download&id=1TycfEUCoXz74bnXLsKVyXSxD9FHumboJ"
     }
   },
   "skills": {
@@ -75,16 +77,24 @@
   },
   "experience": [
     {
-      "role": "Associate Engineer Trainee",
+      "role": "Associate Engineer",
       "company": "Nagarro",
-      "period": "01/2026 – Present",
-      "description": "Built and deployed an end-to-end cloud data pipeline on Azure, integrating ADF, ADLS Gen2, and Databricks, implementing medallion architecture (Bronze–Silver–Gold) with Delta Lake for scalable data processing",
+      "period": "12 Sept 2026 – Present",
+      "description": "Transitioned to full-time Associate Engineer on 12th September 2026. Designing, scaling, and optimizing end-to-end cloud data pipelines on Azure (ADF, ADLS Gen2, Databricks) implementing medallion architecture (Bronze–Silver–Gold) with Delta Lake for enterprise data processing.",
       "color": "var(--accent-color)",
       "highlights": [
+        "Full-time Associate Engineer as of 12th Sept 2026 (previously Associate Engineer Trainee from 01/2026).",
         "Built & deployed an end-to-end cloud data pipeline on Azure (ADF + ADLS Gen2 + Databricks) with medallion architecture (Bronze–Silver–Gold) using Delta Lake.",
         "Developed parameterized ETL workflows using PySpark & Azure Data Factory — handling schema drift, missing data, and automated ingestion with scheduled triggers.",
         "Optimized big data workloads via Spark techniques (partitioning, caching, broadcast joins, Z-Ordering) and implemented monitoring, logging & data quality checks."
       ]
+    },
+    {
+      "role": "Associate Engineer Trainee",
+      "company": "Nagarro",
+      "period": "01/2026 – 12 Sept 2026",
+      "description": "Built and deployed end-to-end cloud data pipelines on Azure integrating ADF, ADLS Gen2, and Databricks, implementing medallion architecture (Bronze–Silver–Gold) with Delta Lake, parameterized PySpark ETL workflows, and Spark workload optimizations.",
+      "color": "#ddd"
     },
     {
       "role": "Product Analyst Intern",
@@ -103,22 +113,22 @@
   ],
   "projects": [
     {
-      "title": "Autonomous Fact Checker",
-      "tagline": "Real-time fact verification using Gemini & RAG",
-      "image": "../../Assets/project_fact_checker.jpg",
-      "description": "Streamlit-based autonomous fact-checking web app integrating Google Gemini via LangChain, DuckDuckGo search, and a ChromaDB knowledge base with HuggingFace embeddings to verify user claims in real time.",
-      "codeUrl": "https://github.com/RahulKumar-007/Fact_checker",
+      "title": "OS_Agent",
+      "tagline": "Autonomous Offline OS Intelligence Agent",
+      "image": "../../Assets/project_os_agent.svg",
+      "description": "100% offline autonomous OS intelligence agent (AEGIS) powered by local LLMs (LM Studio, Ollama) that translates natural language into structured, policy-validated execution plans across 100+ desktop, file, terminal, git, web, and Whisper voice tools with FTS5 search and task scheduling.",
+      "codeUrl": "https://github.com/RahulKumar-007/OS_Agent",
       "demoUrl": "",
-      "tech": ["Python", "Streamlit", "LangChain", "Google Gemini", "ChromaDB", "HuggingFace"]
+      "tech": ["Python", "FastAPI", "Alpine.js", "xterm.js", "Local LLMs", "SQLite (FTS5)", "Whisper STT/TTS", "WebSockets"]
     },
     {
-      "title": "ImgAi",
-      "tagline": "SaaS AI Image Processing Platform",
-      "image": "../../Assets/project_imgai.jpg",
-      "description": "Full-stack SaaS AI image processing platform with user authentication, credit-based billing, and multiple AI-powered image transformation tools.",
-      "codeUrl": "",
-      "demoUrl": "https://img-ai-nu.vercel.app/",
-      "tech": ["React", "Next.js", "Clerk", "Stripe", "TailwindCSS", "Shadcn"]
+      "title": "Unpackr",
+      "tagline": "Low-Disk-Space Archive Extraction Engine in Rust",
+      "image": "../../Assets/project_unpackr.svg",
+      "description": "High-performance archive extraction engine and native desktop app built in Rust that eliminates the 2x disk footprint requirement (~48% peak storage savings) by progressively punching 4KB block-aligned filesystem holes in-place while preserving ZIP structure, cryptographic CRC-32 integrity, and crash resumability.",
+      "codeUrl": "https://github.com/RahulKumar-007/Unpackr",
+      "demoUrl": "",
+      "tech": ["Rust", "Systems Programming", "Linux Filesystems", "CRC-32", "Native GUI & CLI", "Crates.io"]
     },
     {
       "title": "myVCS",

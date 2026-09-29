@@ -194,14 +194,17 @@ export class TerminalApp {
             case 'socials':
                 this.print(`
                     GitHub:   <a href="${profile.links.github}" target="_blank" style="color: #33ff00; text-decoration: underline;">${profile.links.github}</a><br>
-                    LinkedIn: <a href="${profile.links.linkedin}" target="_blank" style="color: #33ff00; text-decoration: underline;">${profile.links.linkedin}</a>
+                    LinkedIn: <a href="${profile.links.linkedin}" target="_blank" style="color: #33ff00; text-decoration: underline;">${profile.links.linkedin}</a><br>
+                    Resume:   <a href="${profile.links.resume}" target="_blank" style="color: #33ff00; text-decoration: underline;">${profile.links.resume}</a>
                 `);
                 break;
 
             case 'download-resume':
-                this.print("Downloading resume...");
+                this.print(`Downloading resume... (<a href="${profile.links.resume}" target="_blank" style="color: #33ff00; text-decoration: underline;">View on Google Drive</a>)`);
                 const link = document.createElement('a');
-                link.href = 'Assets/Resume_2026.pdf';
+                link.href = profile.links.resumeDownload || 'https://drive.google.com/uc?export=download&id=1TycfEUCoXz74bnXLsKVyXSxD9FHumboJ';
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
                 link.download = 'Rahul_Kumar_Resume.pdf';
                 document.body.appendChild(link);
                 link.click();

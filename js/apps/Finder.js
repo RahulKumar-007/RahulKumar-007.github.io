@@ -68,9 +68,17 @@ export class FinderApp {
 
         if (resumeFile) {
             resumeFile.addEventListener('click', () => {
-                // Download resume PDF directly
+                // Download resume PDF directly from Google Drive
+                const resumeUrl = 'https://drive.google.com/file/d/1TycfEUCoXz74bnXLsKVyXSxD9FHumboJ/view?usp=sharing';
+                const fileIdMatch = resumeUrl.match(/\/d\/([^/]+)/);
+                const downloadUrl = fileIdMatch
+                    ? `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`
+                    : resumeUrl;
+
                 const link = document.createElement('a');
-                link.href = '../../Assets/Resume_2026.pdf';
+                link.href = downloadUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
                 link.download = 'Rahul_Kumar_Resume.pdf';
                 document.body.appendChild(link);
                 link.click();
@@ -89,9 +97,14 @@ export class FinderApp {
                                 <i class="ph ph-github-logo"></i> GitHub
                             </a>
                         </li>
-                        <li>
+                        <li style="margin-bottom: 8px;">
                             <a href="https://www.linkedin.com/in/rahul-kumar-5639421b1/" target="_blank" style="color: #0066cc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
                                 <i class="ph ph-linkedin-logo"></i> LinkedIn
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://drive.google.com/file/d/1TycfEUCoXz74bnXLsKVyXSxD9FHumboJ/view?usp=sharing" target="_blank" style="color: #0066cc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                                <i class="ph ph-file-pdf"></i> Resume (Google Drive)
                             </a>
                         </li>
                     </ul>

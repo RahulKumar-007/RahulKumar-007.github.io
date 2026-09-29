@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0a09"/>
+      <stop offset="50%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="rustGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Subtle Grid -->
+  <g stroke="#292524" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="160" y1="0" x2="160" y2="450"/>
+    <line x1="320" y1="0" x2="320" y2="450"/>
+    <line x1="480" y1="0" x2="480" y2="450"/>
+    <line x1="640" y1="0" x2="640" y2="450"/>
+  </g>
+
+  <!-- Main Window Card -->
+  <rect x="70" y="45" width="660" height="360" rx="14" fill="#141413" stroke="#44403c" stroke-width="2"/>
+  <rect x="70" y="45" width="660" height="42" rx="14" fill="#292524"/>
+  <rect x="70" y="73" width="660" height="14" fill="#292524"/>
+
+  <!-- Window Controls -->
+  <circle cx="98" cy="66" r="6" fill="#ef4444"/>
+  <circle cx="118" cy="66" r="6" fill="#f59e0b"/>
+  <circle cx="138" cy="66" r="6" fill="#10b981"/>
+
+  <text x="400" y="71" text-anchor="middle" fill="#fed7aa" font-family="monospace" font-size="15" font-weight="bold" letter-spacing="1.5">
+    UNPACKR :: IN-PLACE ARCHIVE EXTRACTION IN RUST
+  </text>
+
+  <!-- Block-Aligned Hole Punching Visualization -->
+  <g transform="translate(105, 110)">
+    <text x="0" y="16" fill="#fb923c" font-family="monospace" font-size="12" font-weight="bold">
+      4096-BYTE BLOCK-ALIGNED FALLOCATE HOLE PUNCHING
+    </text>
+
+    <!-- Blocks Row -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="110" height="52" rx="6" fill="#431407" stroke="#f97316" stroke-width="1.5"/>
+      <text x="55" y="23" text-anchor="middle" fill="#fed7aa" font-family="monospace" font-size="11" font-weight="bold">ZIP HEADER</text>
+      <text x="55" y="40" text-anchor="middle" fill="#fdba74" font-family="monospace" font-size="10">Preserved</text>
+
+      <rect x="120" y="0" width="110" height="52" rx="6" fill="#1c1917" stroke="#78716c" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="175" y="23" text-anchor="middle" fill="#a8a29e" font-family="monospace" font-size="11" font-weight="bold">4KB PUNCHED</text>
+      <text x="175" y="40" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="10">Reclaimed</text>
+
+      <rect x="240" y="0" width="110" height="52" rx="6" fill="#1c1917" stroke="#78716c" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="295" y="23" text-anchor="middle" fill="#a8a29e" font-family="monospace" font-size="11" font-weight="bold">4KB PUNCHED</text>
+      <text x="295" y="40" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="10">Reclaimed</text>
+
+      <rect x="360" y="0" width="110" height="52" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+      <text x="415" y="23" text-anchor="middle" fill="#a7f3d0" font-family="monospace" font-size="11" font-weight="bold">EXTRACTING</text>
+      <text x="415" y="40" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="10">CRC-32 OK</text>
+
+      <rect x="480" y="0" width="110" height="52" rx="6" fill="#431407" stroke="#f97316" stroke-width="1.5"/>
+      <text x="535" y="23" text-anchor="middle" fill="#fed7aa" font-family="monospace" font-size="11" font-weight="bold">CENTRAL DIR</text>
+      <text x="535" y="40" text-anchor="middle" fill="#fdba74" font-family="monospace" font-size="10">Protected</text>
+    </g>
+  </g>
+
+  <!-- CLI Output Box -->
+  <rect x="105" y="215" width="590" height="140" rx="8" fill="#09090b" stroke="#292524" stroke-width="1.5"/>
+  <text x="125" y="242" fill="#fb923c" font-family="monospace" font-size="13">$ unpackr extract dataset_100gb.zip ./out --reclaim-archive</text>
+  <text x="125" y="268" fill="#a8a29e" font-family="monospace" font-size="12">Standard Peak Disk Footprint : ~200 GB (ENOSPC risk)</text>
+  <text x="125" y="294" fill="#34d399" font-family="monospace" font-size="12">Unpackr Peak Disk Footprint  : ~104 GB (~48% peak storage saved)</text>
+  <text x="125" y="320" fill="#e7e5e4" font-family="monospace" font-size="12">[OK] Cryptographic CRC-32 Verified · Crash-Resumable Checkpoint</text>
+  <text x="125" y="342" fill="#78716c" font-family="monospace" font-size="11">Rust · Native GUI &amp; CLI · Linux fallocate · Crates.io · AUR · Homebrew</text>
+
+  <!-- Bottom Progress Bar -->
+  <rect x="105" y="368" width="590" height="6" rx="3" fill="url(#rustGrad)"/>
+</svg>
