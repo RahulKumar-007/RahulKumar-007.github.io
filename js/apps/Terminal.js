@@ -92,7 +92,7 @@ export class TerminalApp {
         if (e.key === 'Tab') {
             e.preventDefault();
             const partial = this.input.value.trim().toLowerCase();
-            const commands = ['help', 'about', 'projects', 'exp', 'experience', 'contact', 'clear', 'sudo', 'whoami', 'date', 'skills', 'email', 'socials', 'download-resume', 'banner', 'repo', 'history', 'echo', 'neofetch', 'ls'];
+            const commands = ['help', 'about', 'projects', 'exp', 'experience', 'contact', 'clear', 'sudo', 'whoami', 'date', 'skills', 'email', 'socials', 'download-resume', 'banner', 'repo', 'history', 'echo', 'neofetch', 'ls', 'cowsay', 'matrix', 'sl'];
             const match = commands.filter(c => c.startsWith(partial));
             if (match.length === 1) {
                 this.input.value = match[0];
@@ -113,26 +113,26 @@ export class TerminalApp {
             case 'help':
                 this.print(`
                     Available commands:<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">about</span>          - Open About page<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">projects</span>       - View Projects<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">exp</span>            - View Experience<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">contact</span>        - Contact Me<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">skills</span>         - Show technical skills<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">whoami</span>         - About the developer<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">email</span>          - Show email address<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">socials</span>        - Show social links<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">about</span>           - Open About page<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">projects</span>        - View Projects (or <span style="color: #888">projects --detail 1</span>)<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">exp</span>             - View Experience<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">contact</span>         - Contact Me<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">skills</span>          - Show technical skills<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">whoami</span>          - About the developer<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">email</span>           - Show email address<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">socials</span>         - Show social &amp; resume links<br>
                     &nbsp;&nbsp;<span style="color: #33ff00">download-resume</span> - Download resume PDF<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">date</span>           - Show current date/time<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">neofetch</span>       - System info (fun)<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">echo</span>           - Repeat a message<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">banner</span>         - Show ASCII banner<br>
-                    &nbsp;&nbsp;<span style="color: #33ff00">clear</span>          - Clear terminal
+                    &nbsp;&nbsp;<span style="color: #33ff00">neofetch</span>        - System info<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">cowsay</span>          - ASCII cow says hello<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">matrix</span>          - Enter the Matrix<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">sl</span>              - Steam locomotive<br>
+                    &nbsp;&nbsp;<span style="color: #33ff00">clear</span>           - Clear terminal
                 `);
                 break;
 
             case 'about':
                 this.print("Opening About Me...");
-                this.windowManager.openWindow('browser', 'about');
+                this.windowManager.openWindow('browser', 'https://portfolio.os/about');
                 break;
 
             case 'projects':
@@ -143,7 +143,7 @@ export class TerminalApp {
                         this.print(`
                             <span style="color: #33ff00; font-weight: bold;">${p.title}</span><br>
                             <span style="color: #888;">${p.description}</span><br>
-                            <span style="color: #ff00ff;">Tech:</span> ${p.tech.join(', ')}<br>
+                            <span style="color: #22d3ee;">Tech:</span> ${p.tech.join(', ')}<br>
                             ${p.codeUrl ? `<span style="color: #888;">Code:</span> ${p.codeUrl}<br>` : ''}
                             ${p.demoUrl ? `<span style="color: #888;">Demo:</span> ${p.demoUrl}` : ''}
                         `);
@@ -152,19 +152,19 @@ export class TerminalApp {
                     }
                 } else {
                     this.print("Opening Projects...");
-                    this.windowManager.openWindow('browser', 'projects');
+                    this.windowManager.openWindow('browser', 'https://portfolio.os/projects');
                 }
                 break;
 
             case 'exp':
             case 'experience':
                 this.print("Opening Experience...");
-                this.windowManager.openWindow('browser', 'experience');
+                this.windowManager.openWindow('browser', 'https://portfolio.os/experience');
                 break;
 
             case 'contact':
                 this.print("Opening Contact...");
-                this.windowManager.openWindow('browser', 'contact');
+                this.windowManager.openWindow('browser', 'https://portfolio.os/contact');
                 break;
 
             case 'skills':
@@ -219,7 +219,7 @@ export class TerminalApp {
                 this.print(`
                     <span style="color: #33ff00;">          ██████████</span>   <span style="color: #fff;">${profile.name}</span><br>
                     <span style="color: #33ff00;">        ██        ██</span>   <span style="color: #888;">------------------------</span><br>
-                    <span style="color: #33ff00;">      ██            ██</span>  <span style="color: #fff;">OS:</span> <span style="color: #888;">PortfolioOS 2.0</span><br>
+                    <span style="color: #33ff00;">      ██            ██</span>  <span style="color: #fff;">OS:</span> <span style="color: #888;">RahulOS 2.0</span><br>
                     <span style="color: #33ff00;">    ██                ██</span> <span style="color: #fff;">Host:</span> <span style="color: #888;">${window.location.hostname}</span><br>
                     <span style="color: #33ff00;">  ██                    ██</span><span style="color: #fff;">Shell:</span> <span style="color: #888;">portfolio-bash</span><br>
                     <span style="color: #33ff00;">  ██    ████████████    ██</span><span style="color: #fff;">Uptime:</span> <span style="color: #888;">${Math.floor((Date.now() - performance.timing.navigationStart) / 60000)} mins</span><br>
@@ -231,6 +231,37 @@ export class TerminalApp {
                     <span style="color: #33ff00;">        ██        ██</span><br>
                     <span style="color: #33ff00;">          ██████████</span><br>
                 `);
+                break;
+
+            case 'cowsay': {
+                const msg = cmd.slice(6).trim() || "Hire Rahul! He builds cloud data pipelines & AI systems.";
+                const border = '-'.repeat(Math.min(msg.length + 2, 56));
+                this.print(`<pre style="margin: 0; color: #22d3ee; font-family: inherit;"> ${border}
+&lt; ${msg} &gt;
+ ${border}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||</pre>`);
+                break;
+            }
+
+            case 'matrix':
+                this.print(`<span style="color: #33ff00;">Wake up, Neo...<br>01010010 01100001 01101000 01110101 01101100 01001111 01010011<br>Follow the white rabbit. 🐇</span>`);
+                break;
+
+            case 'sl':
+                this.print(`<pre style="margin: 0; color: #f59e0b; font-family: inherit;">      ====        ________                ___________
+  _D _|  |_______/        \\__I_I_____===__|_________|
+   |(_)---  |   H\\________/ |   |        =|___ ___|
+   /     |  |   H  |  |     |   |         ||_| |_||
+  |      |  |   H  |__--------------------| [___] |
+  | ________|___H__/__|_____/[][]~\\_______|       |
+  |/ |   |-----------I_____I [][] []  D   |=======|__
+__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__
+ |/-=|___|=    ||    ||    ||    |_____/~\\___/
+  \\_/      \\O=====O=====O=====O_/      \\_/          </pre>`);
                 break;
 
             case 'echo':

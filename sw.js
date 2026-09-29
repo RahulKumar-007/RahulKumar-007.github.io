@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolioos-v2';
+const CACHE_NAME = 'portfolioos-v3';
 
 const PRECACHE_URLS = [
     '/',

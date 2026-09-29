@@ -110,19 +110,66 @@ export class Browser {
     }
 
     renderProjectCard(project, index) {
+        const themes = [
+            {
+                gradient: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #0284c7 100%)',
+                icon: 'ph-fill ph-robot',
+                badgeBg: 'rgba(34, 211, 238, 0.2)',
+                badgeColor: '#67e8f9',
+                chipBg: '#eef2ff',
+                chipColor: '#4338ca'
+            },
+            {
+                gradient: 'linear-gradient(135deg, #431407 0%, #9a3412 50%, #059669 100%)',
+                icon: 'ph-fill ph-package',
+                badgeBg: 'rgba(251, 146, 60, 0.22)',
+                badgeColor: '#fed7aa',
+                chipBg: '#fff7ed',
+                chipColor: '#c2410c'
+            },
+            {
+                gradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%)',
+                icon: 'ph-fill ph-git-branch',
+                badgeBg: 'rgba(45, 212, 191, 0.2)',
+                badgeColor: '#99f6e4',
+                chipBg: '#f0fdfa',
+                chipColor: '#0f766e'
+            }
+        ];
+        const theme = themes[index % themes.length];
+        const visibleTech = (project.tech || []).slice(0, 4);
+        const extraTech = (project.tech || []).length - visibleTech.length;
+
         return `
-            <div class="project-card" data-project-index="${index}"
-                 style="border: 1px solid #eee; border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
-                <div style="height: 160px; overflow: hidden;">
-                    <img src="${project.image}" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div style="padding: 16px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                        <h3 style="font-size: 16px; margin: 0;">${project.title}</h3>
-                        ${project.codeUrl ? `<a href="${project.codeUrl}" target="_blank" style="text-decoration: none; color: var(--accent-color); font-size: 12px; border: 1px solid var(--accent-color); padding: 4px 8px; border-radius: 4px;" onclick="event.stopPropagation()">View Code</a>` : ''}
-                        ${project.demoUrl ? `<a href="${project.demoUrl}" target="_blank" style="text-decoration: none; color: #10b981; font-size: 12px; border: 1px solid #10b981; padding: 4px 8px; border-radius: 4px;" onclick="event.stopPropagation()">Try Out</a>` : ''}
+            <div class="project-card" data-project-index="${index}">
+                <div class="project-banner" style="background: ${theme.gradient};">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <span style="background: ${theme.badgeBg}; color: ${theme.badgeColor}; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18);">
+                            ${project.tagline || 'Featured Project'}
+                        </span>
+                        <i class="${theme.icon}" style="font-size: 28px; opacity: 0.9;"></i>
                     </div>
-                    <p style="font-size: 13px; color: #666; margin-top: 8px; line-height: 1.5;">${project.description}</p>
+                    <h3 style="font-size: 20px; font-weight: 700; margin: 16px 0 0; color: #fff; letter-spacing: -0.01em;">
+                        ${project.title}
+                    </h3>
+                </div>
+                <div style="padding: 18px 20px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 14px;">
+                    <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.6;">
+                        ${project.description}
+                    </p>
+                    <div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;">
+                            ${visibleTech.map(t => `<span style="background: ${theme.chipBg}; color: ${theme.chipColor}; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">${t}</span>`).join('')}
+                            ${extraTech > 0 ? `<span style="background: #f1f5f9; color: #64748b; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;">+${extraTech}</span>` : ''}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid #f1f5f9;">
+                            <span style="font-size: 12px; color: #64748b; font-weight: 500;">Click for details</span>
+                            <div style="display: flex; gap: 8px;">
+                                ${project.codeUrl ? `<a href="${project.codeUrl}" target="_blank" style="text-decoration: none; background: var(--accent-gradient); color: #fff; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()"><i class="ph ph-github-logo"></i> Code</a>` : ''}
+                                ${project.demoUrl ? `<a href="${project.demoUrl}" target="_blank" style="text-decoration: none; color: #10b981; font-size: 12px; font-weight: 600; border: 1px solid #10b981; padding: 4px 10px; border-radius: 8px;" onclick="event.stopPropagation()">Live Demo</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -138,17 +185,17 @@ export class Browser {
                     <span class="modal-close">&times;</span>
                 </div>
                 <div class="modal-body">
-                    <img src="${project.image}" alt="${project.title}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 16px;">
-                    <p style="font-size: 15px; line-height: 1.6; color: #444; margin-bottom: 16px;">${project.description}</p>
-                    <div style="margin-bottom: 16px;">
-                        <strong style="display: block; margin-bottom: 8px; color: #333;">Tech Stack</strong>
+                    <img src="${project.image}" alt="${project.title}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 16px;">
+                    <p style="font-size: 15px; line-height: 1.6; color: #334155; margin-bottom: 16px;">${project.description}</p>
+                    <div style="margin-bottom: 18px;">
+                        <strong style="display: block; margin-bottom: 8px; color: #0f172a;">Tech Stack</strong>
                         <div style="display: flex; flex-wrap: wrap; gap: 6px;">
                             ${project.tech.map(t => `<span style="background: #eef2ff; color: #4f46e5; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 16px;">${t}</span>`).join('')}
                         </div>
                     </div>
                     <div style="display: flex; gap: 12px;">
-                        ${project.codeUrl ? `<a href="${project.codeUrl}" target="_blank" class="modal-btn" style="background: var(--accent-color); color: #fff; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-size: 14px;"><i class="ph ph-github-logo"></i> View Code</a>` : ''}
-                        ${project.demoUrl ? `<a href="${project.demoUrl}" target="_blank" class="modal-btn" style="background: #10b981; color: #fff; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-size: 14px;"><i class="ph ph-arrow-square-out"></i> Live Demo</a>` : ''}
+                        ${project.codeUrl ? `<a href="${project.codeUrl}" target="_blank" class="modal-btn" style="background: var(--accent-gradient); color: #fff; padding: 9px 20px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 600;"><i class="ph ph-github-logo"></i> View Code</a>` : ''}
+                        ${project.demoUrl ? `<a href="${project.demoUrl}" target="_blank" class="modal-btn" style="background: #10b981; color: #fff; padding: 9px 20px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 600;"><i class="ph ph-arrow-square-out"></i> Live Demo</a>` : ''}
                     </div>
                 </div>
             </div>
@@ -172,27 +219,68 @@ export class Browser {
         let html = '';
 
         if (route === 'home') {
+            const currentRole = experience[0];
             html = `
-                <div class="browser-home">
-                    <div class="home-card" data-nav="about">
-                        <i class="ph-fill ph-user card-icon"></i>
-                        <div class="card-title">About Me</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Skills & background</p>
+                <div class="browser-home-wrapper">
+                    <div class="home-hero-banner">
+                        <div style="max-width: 560px;">
+                            <div class="hero-badge">
+                                <span class="hero-badge-dot"></span>
+                                ${currentRole.role} @ ${currentRole.company}
+                            </div>
+                            <h1 style="font-size: 26px; font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em;">
+                                👋 Welcome to RahulOS
+                            </h1>
+                            <p style="font-size: 13.5px; color: #cbd5e1; margin: 0; line-height: 1.6;">
+                                ${profile.tagline}
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="home-cta-btn" data-nav="projects" style="background: var(--accent-gradient); color: #fff; border: none; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);">
+                                Explore Projects →
+                            </button>
+                            <button class="home-cta-btn" data-nav="about" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.22); padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;">
+                                About Me
+                            </button>
+                        </div>
                     </div>
-                    <div class="home-card" data-nav="experience">
-                        <i class="ph-fill ph-briefcase card-icon"></i>
-                        <div class="card-title">Experience</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Work History</p>
+
+                    <div class="browser-home">
+                        <div class="home-card" data-nav="about">
+                            <i class="ph-fill ph-user-circle card-icon"></i>
+                            <div class="card-title">About Me</div>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 6px;">Skills & background</p>
+                        </div>
+                        <div class="home-card" data-nav="experience">
+                            <i class="ph-fill ph-briefcase card-icon"></i>
+                            <div class="card-title">Experience</div>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 6px;">Career timeline</p>
+                        </div>
+                        <div class="home-card" data-nav="projects">
+                            <i class="ph-fill ph-rocket-launch card-icon"></i>
+                            <div class="card-title">Projects</div>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 6px;">Selected works</p>
+                        </div>
+                        <div class="home-card" data-nav="contact">
+                            <i class="ph-fill ph-paper-plane-tilt card-icon"></i>
+                            <div class="card-title">Contact</div>
+                            <p style="font-size: 12px; color: #64748b; margin-top: 6px;">Get in touch</p>
+                        </div>
                     </div>
-                    <div class="home-card" data-nav="projects">
-                        <i class="ph-fill ph-code card-icon"></i>
-                        <div class="card-title">Projects</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Selected Works</p>
-                    </div>
-                    <div class="home-card" data-nav="contact">
-                        <i class="ph-fill ph-envelope card-icon"></i>
-                        <div class="card-title">Contact</div>
-                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Get in touch</p>
+
+                    <div class="github-activity-strip">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="ph-fill ph-github-logo" style="font-size: 18px; color: #0f172a;"></i>
+                                <span style="font-size: 14px; font-weight: 700; color: #0f172a; font-family: var(--font-display);">GitHub Activity</span>
+                            </div>
+                            <a href="${profile.links.github}" target="_blank" style="font-size: 12px; color: var(--accent-color); text-decoration: none; font-weight: 600;">
+                                @RahulKumar-007 ↗
+                            </a>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <img src="https://ghchart.rshah.org/6366f1/RahulKumar-007" alt="RahulKumar-007 GitHub Contribution Chart" style="width: 100%; min-width: 520px; display: block;">
+                        </div>
                     </div>
                 </div>
             `;
@@ -200,9 +288,9 @@ export class Browser {
             viewport.innerHTML = html;
             viewport.scrollTop = 0;
 
-            viewport.querySelectorAll('.home-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    this.navigate(`https://portfolio.os/${card.dataset.nav}`);
+            viewport.querySelectorAll('.home-card, .home-cta-btn').forEach(el => {
+                el.addEventListener('click', () => {
+                    this.navigate(`https://portfolio.os/${el.dataset.nav}`);
                 });
             });
             return;
@@ -214,8 +302,9 @@ export class Browser {
                 <div style="padding: 40px 48px; max-width: 860px; margin: 0 auto; font-family: 'Inter', system-ui, sans-serif;">
 
                     <div class="about-hero" style="display: flex; gap: 32px; align-items: center; margin-bottom: 40px; background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%); border-radius: 20px; padding: 28px; border: 1px solid #e0e7ff;">
-                        <img src="${profile.avatar}"
-                             style="width: 110px; height: 110px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--accent-color, #6366f1); flex-shrink: 0;">
+                        <div class="avatar-ring-wrapper">
+                            <img src="${profile.avatar}" alt="${profile.name}">
+                        </div>
                         <div>
                             <h1 id="typing-name" style="font-size: 28px; font-weight: 700; margin: 0 0 4px; color: #1e1b4b;"></h1>
                             <p style="font-size: 14px; font-weight: 600; color: var(--accent-color, #6366f1); margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">${profile.title}</p>
@@ -259,15 +348,18 @@ export class Browser {
         } else if (route === 'experience') {
             html = `
                 <div style="padding: 40px; max-width: 800px; margin: 0 auto;">
-                    <h1 style="margin-bottom: 32px;">Experience</h1>
+                    <h1 style="margin-bottom: 32px; color: #0f172a;">Experience</h1>
                     <div class="timeline">
                         ${experience.map((exp, i) => `
                             <div class="timeline-item" style="--timeline-color: ${exp.color};">
-                                <div class="timeline-dot"></div>
+                                <div class="timeline-dot ${i === 0 ? 'live-pulse' : ''}"></div>
                                 <div class="timeline-card">
-                                    <div class="timeline-meta">${exp.company} • ${exp.period}</div>
+                                    <div class="timeline-meta">
+                                        <span>${exp.company} • ${exp.period}</span>
+                                        ${i === 0 ? `<span class="live-role-pill">● Active · Full-Time</span>` : ''}
+                                    </div>
                                     <h3 class="timeline-role">${exp.role}</h3>
-                                    <p style="color: #444; line-height: 1.5; font-size: 14px;">${exp.description}</p>
+                                    <p style="color: #475569; line-height: 1.6; font-size: 14px; margin: 0;">${exp.description}</p>
                                 </div>
                             </div>
                         `).join('')}
@@ -276,9 +368,10 @@ export class Browser {
             `;
         } else if (route === 'projects') {
             html = `
-                <div style="padding: 40px; max-width: 900px; margin: 0 auto;">
-                    <h1 style="margin-bottom: 32px;">Projects</h1>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+                <div style="padding: 40px; max-width: 940px; margin: 0 auto;">
+                    <h1 style="margin-bottom: 8px; color: #0f172a;">Featured Projects</h1>
+                    <p style="color: #64748b; font-size: 14px; margin-bottom: 28px;">Systems engineering, autonomous AI agents, and developer tooling.</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
                         ${projects.map((p, i) => this.renderProjectCard(p, i)).join('')}
                     </div>
                 </div>

@@ -14,7 +14,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -30,21 +30,32 @@
 <body>
     <div id="splash-screen">
         <div class="splash-content">
-            <div class="splash-logo"><i class="ph-fill ph-apple-logo"></i></div>
-            <div class="splash-spinner"></div>
-            <div class="splash-text">Starting up...</div>
+            <div class="splash-logo-ring">
+                <div class="splash-logo"><i class="ph-fill ph-apple-logo"></i></div>
+            </div>
+            <div class="splash-text-wrap">
+                <span class="splash-text">Booting PortfolioOS v2.0...</span><span class="splash-cursor">_</span>
+            </div>
+            <div class="splash-progress-track">
+                <div class="splash-progress-bar" id="splash-progress-bar"></div>
+            </div>
         </div>
     </div>
 
     <div id="desktop" style="display: none;">
-        <!-- Background Wallpaper -->
-        <div class="wallpaper"></div>
+        <!-- Dynamic Animated Mesh Wallpaper -->
+        <div class="wallpaper">
+            <div class="aurora-blob blob-1"></div>
+            <div class="aurora-blob blob-2"></div>
+            <div class="aurora-blob blob-3"></div>
+            <div class="wallpaper-grid"></div>
+        </div>
 
         <!-- Top Menu Bar -->
         <header id="menu-bar">
             <div class="left-menu">
                 <span class="apple-logo"><i class="ph-fill ph-apple-logo"></i></span>
-                <span class="menu-item"><b>Finder</b></span>
+                <span class="menu-item"><b>RahulOS</b></span>
                 <span class="menu-item">File</span>
                 <span class="menu-item">Edit</span>
                 <span class="menu-item">View</span>
@@ -54,7 +65,7 @@
             </div>
             <div class="right-menu">
                 <button id="download-resume-btn" class="resume-btn" title="Download Resume">
-                    <i class="ph ph-download-simple"></i> Resume
+                    <i class="ph ph-download-simple"></i> <span>Resume</span>
                 </button>
                 <span class="menu-icon"><i class="ph ph-wifi-high"></i></span>
                 <span class="menu-icon"><i class="ph ph-battery-charging"></i></span>
@@ -66,36 +77,53 @@
         <main id="window-area">
             <!-- Desktop Icons -->
             <div class="desktop-icons">
-                <!-- Icons will be injected here or hardcoded -->
-                <div class="desktop-icon" data-target="about">
-                    <div class="icon-img folder-icon"><i class="ph-fill ph-folder-user"></i></div>
+                <div class="desktop-icon" data-target="about" style="--icon-order: 1;">
+                    <div class="icon-img folder-icon icon-about"><i class="ph-fill ph-user-circle"></i></div>
                     <span class="icon-label">About Me</span>
                 </div>
-                <div class="desktop-icon" data-target="projects">
-                    <div class="icon-img folder-icon"><i class="ph-fill ph-folder-star"></i></div>
+                <div class="desktop-icon" data-target="projects" style="--icon-order: 2;">
+                    <div class="icon-img folder-icon icon-projects"><i class="ph-fill ph-rocket-launch"></i></div>
                     <span class="icon-label">Projects</span>
                 </div>
+                <div class="desktop-icon" data-target="experience" style="--icon-order: 3;">
+                    <div class="icon-img folder-icon icon-exp"><i class="ph-fill ph-briefcase"></i></div>
+                    <span class="icon-label">Experience</span>
+                </div>
+                <div class="desktop-icon" data-target="terminal" style="--icon-order: 4;">
+                    <div class="icon-img folder-icon icon-term"><i class="ph-fill ph-terminal-window"></i></div>
+                    <span class="icon-label">Terminal</span>
+                </div>
+            </div>
+
+            <!-- Subtle Desktop Shortcut Hint -->
+            <div class="desktop-shortcut-pill" id="shortcut-hint" title="Click or press Cmd/Ctrl + K to launch Terminal">
+                <span class="shortcut-badge">⌘K</span>
+                <span>Press <b>Ctrl/⌘ + K</b> to open Terminal</span>
             </div>
         </main>
 
         <!-- Bottom Dock -->
         <footer id="dock-container">
             <div id="dock" class="dock">
-                <!-- Dock items will be injected by JS or hardcoded -->
-                <div class="dock-item" data-app="finder" title="Finder">
+                <div class="dock-item dock-finder" data-app="finder" data-label="Finder">
+                    <span class="dock-tooltip">Finder</span>
                     <div class="app-icon"><i class="ph-fill ph-smiley"></i></div>
                 </div>
-                <div class="dock-item" data-app="mail" title="Mail">
+                <div class="dock-item dock-mail" data-app="mail" data-label="Mail">
+                    <span class="dock-tooltip">Mail</span>
                     <div class="app-icon"><i class="ph-fill ph-envelope"></i></div>
                 </div>
-                <div class="dock-item" data-app="safari" title="Browser">
+                <div class="dock-item dock-browser" data-app="safari" data-label="Portfolio Browser">
+                    <span class="dock-tooltip">Portfolio Browser</span>
                     <div class="app-icon"><i class="ph-fill ph-compass"></i></div>
                 </div>
                 <div class="dock-separator"></div>
-                <div class="dock-item" data-app="terminal" title="Terminal">
+                <div class="dock-item dock-terminal" data-app="terminal" data-label="Terminal">
+                    <span class="dock-tooltip">Terminal</span>
                     <div class="app-icon"><i class="ph-fill ph-terminal-window"></i></div>
                 </div>
-                <div class="dock-item" data-app="trash" title="Trash">
+                <div class="dock-item dock-trash" data-app="trash" data-label="Trash">
+                    <span class="dock-tooltip">Trash</span>
                     <div class="app-icon"><i class="ph-fill ph-trash"></i></div>
                 </div>
             </div>

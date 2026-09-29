@@ -6,13 +6,24 @@ function bootSplash() {
     const splash = document.getElementById('splash-screen');
     const desktop = document.getElementById('desktop');
     const text = splash?.querySelector('.splash-text');
+    const progressBar = document.getElementById('splash-progress-bar');
 
-    const messages = ['Starting up...', 'Loading kernel...', 'Initializing display...', 'Launching PortfolioOS...', 'Ready!'];
+    const messages = [
+        'Booting PortfolioOS v2.0...',
+        'Mounting kernel & modules...',
+        'Initializing glass compositor...',
+        'Launching RahulOS desktop...',
+        'System Ready!'
+    ];
     let i = 0;
 
     const timer = setInterval(() => {
         i++;
         if (text && messages[i]) text.textContent = messages[i];
+        if (progressBar) {
+            const pct = Math.min(100, Math.round(((i + 1) / messages.length) * 100));
+            progressBar.style.width = `${pct}%`;
+        }
         if (i >= messages.length - 1) {
             clearInterval(timer);
             setTimeout(() => {
@@ -21,9 +32,9 @@ function bootSplash() {
                     splash.style.display = 'none';
                     desktop.style.display = '';
                 }, 500);
-            }, 400);
+            }, 350);
         }
-    }, 300);
+    }, 280);
 }
 
 if ('serviceWorker' in navigator) {
@@ -70,12 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = icon.dataset.target;
             windowManager.openWindow(target);
         });
+    });
 
-        // Touch support for mobile (single tap)
-        icon.addEventListener('touchstart', () => {
-            const target = icon.dataset.target;
-            // clear selection of others?
+    // Keyboard shortcut (Cmd/Ctrl + K) & shortcut pill click to open Terminal
+    const shortcutHint = document.getElementById('shortcut-hint');
+    if (shortcutHint) {
+        shortcutHint.addEventListener('click', () => {
+            windowManager.openWindow('terminal');
         });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            windowManager.openWindow('terminal');
+        }
     });
 
     console.log('OS Portfolio Environment Initialized');

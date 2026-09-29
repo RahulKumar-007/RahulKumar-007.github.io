@@ -65,7 +65,7 @@ export class WindowManager {
                 return;
             } else {
                 // Create new Browser Window
-                const winEl = this.createWindowElement('browser', 'Safari Browser', '');
+                const winEl = this.createWindowElement('browser', 'Portfolio Browser', '');
                 this.container.appendChild(winEl);
                 this.windows.push({ id: 'browser', element: winEl, minimized: false });
 
@@ -156,7 +156,7 @@ export class WindowManager {
             if (this.checkAndRestore('terminal')) return;
 
             const winEl = this.createWindowElement('terminal', 'Terminal', '');
-            winEl.style.background = '#000'; // Override for terminal
+            winEl.style.background = '#090d16'; // Override for terminal
             this.container.appendChild(winEl);
             this.windows.push({ id: 'terminal', element: winEl, minimized: false });
 
@@ -191,9 +191,9 @@ export class WindowManager {
         div.style.zIndex = this.zIndexCounter++;
 
         // Stagger positions
-        const offset = this.windows.filter(w => !w.minimized).length * 20;
-        div.style.top = `${60 + offset}px`;
-        div.style.left = `${60 + offset}px`;
+        const offset = this.windows.filter(w => !w.minimized).length * 22;
+        div.style.top = `${58 + offset}px`;
+        div.style.left = `${130 + offset}px`;
 
         // Loading skeleton (replaced by actual content)
         const loadingContent = content || `
@@ -277,10 +277,10 @@ export class WindowManager {
         if (windowEl.classList.contains('maximized')) {
             windowEl.classList.remove('maximized');
 
-            windowEl.style.width = '600px';
-            windowEl.style.height = '400px';
-            windowEl.style.top = windowEl.dataset.prevTop || '100px';
-            windowEl.style.left = windowEl.dataset.prevLeft || '100px';
+            windowEl.style.width = '820px';
+            windowEl.style.height = '540px';
+            windowEl.style.top = windowEl.dataset.prevTop || '70px';
+            windowEl.style.left = windowEl.dataset.prevLeft || '140px';
         } else {
             // Store state
             windowEl.dataset.prevTop = windowEl.style.top;
